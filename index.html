@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<!---测试-->
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta http-equiv="content-script-type" content="text/javascript">
+		<title>航运公司管理</title>
+		<link rel="stylesheet" href="library/bootstrap-3.3.5/css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/paging.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="library/angular/angular-ui-tree.css">
+		<link rel="stylesheet" href="directive/style.css">
+		<link rel="stylesheet" href="page/frame/frame.cset/frame.cset.css">
+		<link rel="stylesheet" href="page/frame/frame.set_work/frame.process.css">
+		<link rel="stylesheet" href="library/ztree/bootstrapStyle.css">
+		<link rel="stylesheet" type="text/css" href="library/fullcalendar-3.7.0/fullcalendar.min.css" />
+		<link rel="stylesheet" href="css/style-ism.css" />
+
+		<body ng-app="myApp" class="modal-nest " style="overflow-y: auto;">
+			<div ui-view>
+				<h5 class='loading text-center'>Loading...</h5></div>
+		</body>
+
+		<script>
+			var apiRoot = "http://192.168.20.175:8080/ism/";
+			//var apiRoot = "/ism/";
+		</script>
+
+		<script src="library/angular/angular-1.6.0.js"></script>
+		<script src="library/angular-validation/angular-validation.js"></script>
+		<script src="library/angular-validation/angular-validation-rule.js"></script>
+		<script src="library/angular/angular-ui-router.js"></script>
+		<script src="library/angular/angular-ui-tree.js"></script>
+		<script src="library/angular/angular-sanitize.js"></script>
+		<script src="library/angular/ui-bootstrap-tpls-2.5.0.js"></script>
+		<script src="library/jquery/jquery.js"></script>
+		<script src="library/moment/moment.js"></script>
+		<script src="library/layer/layer/layer.js"></script>
+		<script src="library/md5.js"></script>
+		<script src="library/md5jm.js"></script>
+		<script src="library/bs.js"></script>
+		<script src="library/echarts/echarts.min.js"></script>
+
+		<script src="modules/mod.module.js"></script>
+		<script src="modules/service/data.module.js"></script>
+		<script src="modules/zh.module.js"></script>
+		<script src="modules/service.module.js"></script>
+		<script src="modules/frame.module.js"></script>
+		<script src="directive/aoHaiSelected/aoHaiSelected.js"></script>
+		<script src="directive/aHaiRadio/aHaiRadio.js"></script>
+		<script src="modules/service/spliceString/spliceString.js"></script>
+		<script src="directive/lsmPages/lsmPage.js"></script>
+		<script src="directive/lsmChecked/lsmCheck.js"></script>
+		<script src="directive/lsmUpdateUser/lsmUpdateUser.js"></script>
+		<script src="directive/lsmUpdateDepartment/lsmUpdateDepartment.js"></script>
+		<script src="directive/lsmCheckSelectDepart/lsmCheckSelectDepart.js"></script>
+		<script src="directive/lsmSelectDepart/lsmSelectDepart.js"></script>
+		<script src="directive/lsmDepartmentSelection/lsmDepartmentSelection.js"></script>
+		<script src="directive/lsmPostSelection/lsmPostSelection.js"></script>
+		<script src="directive/lsmAddAgentPost/lsmAddAgentPost.js"></script>
+		<script src="modules/service/lsmAlert/lsmAlert.js"></script>
+		<script src="directive/openTableDesign/openTableDesign.js"></script>
+		<script src="directive/checkTableData/checkTableData.js"></script>
+		<script src="directive/openDiyTable/openDiyTable.js"></script>
+		<script src="directive/addAppoint/addAppoint.view.js"></script>
+		<!-- 指令的加载 -->
+		<script src="directive/lib.directive.js"></script>
+		<script src="directive/citySelected/citySelected.js"></script>
+		<script src="page/login/login.view.js"></script>
+		<script src="page/company-apply/company-apply.view.js"></script>
+		<!-- 公司设定 -->
+		<script src="page/frame/frame.cset/frame.cset-base/frame.cset-base.view.js"></script>
+		<script src="page/frame/frame.cset/frame.cset-depart/frame.cset-depart.view.js"></script>
+		<script src="page/frame/frame.cset/frame.cset-officer/frame.cset-officer.view.js"></script>
+		<script src="page/frame/frame.cset/frame.cset-user/frame.cset-user.view.js"></script>
+		<!-- 流程设定 -->
+		<script src="page/frame/frame.set_work/frame.approve-set_work/frame.approve-set_work.view.js"></script>
+		<script src="page/frame/frame.set_work/frame.approve-set_form/frame.approve-set_form.view.js"></script>
+		<!-- 流程设定模板 -->
+		<script src="directive/flow/processSettings/processSettings.view.js"></script>
+		<script src="directive/flow/data/data.view.js"></script>
+		<script src="directive/flow/fillPerson/fillPerson.view.js"></script>
+		<script src="directive/flow/approve/approve.view.js"></script>
+		<script src="directive/flow/newdata/newdata.view.js"></script>
+		<script src="directive/flow/last/last.view.js"></script>
+		<script src="directive/flow/selectdata/selectdata.view.js"></script>
+		<script src="directive/flow/processList/processList.view.js"></script>
+		<script src="directive/flow/timing/timing.view.js"></script>
+		<script src="directive/flow/visible/visible.view.js"></script>
+
+		<!--通知公告-->
+		<script src="page/frame/frame.notice/frame.notice-notice/frame.notice-notice.view.js"></script>
+		<script src="page/frame/frame.notice/frame.notice-list/frame.notice-list.view.js"></script>
+		<!-- 工作台 -->
+		<script src="page/frame/frame.control/frame.control.view.js"></script>
+		<!-- 我的消息 -->
+		<script src="page/frame/frame.msg/frame.msg.view.js"></script>
+		<!--我的申请-->
+		<script src="page/frame/frame.apply/frame.apply-add/frame.apply-add.view.js"></script>
+		<script src="page/frame/frame.apply/frame.apply-all/frame.apply-all.view.js"></script>
+		<!-- 我的审批 -->
+		<script src="page/frame/frame.approve/frame.approve-my_approve/frame.approve-my_approve.view.js"></script>
+		<script src="page/frame/frame.approve/frame.approve-my_approve_history/frame.approve-my_approve_history.view.js"></script>
+		<!-- 台帐 -->
+		<script src="page/frame/frame.reportForm/frame.reportForm.view.js"></script>
+		<!-- 体系正文 -->
+		<script src="page/frame/frame.systemText/frame.systemText.view.js"></script>
+		<script type="text/javascript" src="library/ztree/jquery.ztree.core.js"></script>
+		<!--<script type="text/javascript" src="library/ztree/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="library/ztree/jquery.ztree.exedit.js"></script>-->
+
+		<!-- 我的待办 -->
+		<script src="library/fullcalendar-3.7.0/fullcalendar.min.js"></script>
+		<script src="library/fullcalendar-3.7.0/locale/zh-cn.js"></script>
+		<script src="library/fullcalendar-3.7.0/gcal.min.js"></script>
+		<script src="library/ui-calendar-master/src/calendar.js"></script>
+		<script src="page/frame/frame.deal/frame.deal.view.js"></script>
+
+		<!-- 船公司台帐信息 -->
+		<script src="page/frame/frame.reportInfo/frame.reportInfo.view.js"></script>
+		<script src="page/frame/frame.reportInfo/frame.reportDetail/frame.reportDetail.view.js"></script>
+
+		<!--设置中心-->
+		<script src="page/frame/frame.sysSettings/frame.sysSettings.view.js"></script>
+		<!--与我相关的流程-->
+		<script src="page/frame/frame.relevant/frame.relevant.view.js"></script>
+		<!--船舶维护模块-->
+		<script src="page/frame/frame.shipMaintain/frame.shipMaintain.view.js"></script>
+		<!--船舶信息查询模块-->
+		<script src="page/frame/frame.shipInfo/frame.shipInfo.view.js"></script>
+		<!-- 我的模板 -->
+		<script src="directive/directive.directive.js"></script>
+		<script src="directive/popup.directive.js"></script>
+		<script src="directive/addlable/addLable.view.js"></script>
+
+		<!--新增-->
+		<script src="directive/addDepartment/addDepartment.view.js"></script>
+		<script src="directive/alert/alert.view.js"></script>
+		<script src="directive/confirm/confirm.view.js"></script>
+		<script src="directive/addUserAlert/addUserAlert.view.js"></script>
+		<script src="directive/officerList/officerList.view.js"></script>
+		<script src="directive/compileText/compileText.view.js"></script>
+		<script src="directive/datepicker/datepicker.view.js"></script>
+		<script src="directive/datetime/datetime.view.js"></script>
+		<script src="directive/viewNotice/viewNotice.view.js"></script>
+		<script src="directive/viewNoticeRecord/viewNoticeRecord.view.js"></script>
+		<script src="directive/viewMsg/viewMsg.view.js"></script>
+		<script src="directive/applyForm/applyForm.view.js"></script>
+		<script src="directive/lookApplyForm/lookApplyForm.view.js"></script>
+		<script src="directive/lookApprovalForm/lookApprovalForm.view.js"></script>
+		<script src="directive/approvalForm/approvalForm.view.js"></script>
+		<script src="directive/reportForm/reportForm.view.js"></script>
+		<script src="directive/systemText/systemText.view.js"></script>
+		<script src="directive/reportList/reportList.view.js"></script>
+		<script src="directive/crewList/crewList.view.js"></script>
+		<script src="directive/crewDetailedInfo/crewDetailedInfo.view.js"></script>
+		<script src="directive/userAuth/userAuth.view.js"></script>
+		<script src="directive/aftProcessList/aftProcessList.view.js"></script>
+		
+		<!-- 自定义显示控件 -->
+		<script src="directive/showdirective/input/input.view.js"></script>
+		<script src="directive/showdirective/pasword/pasword.view.js"></script>
+		<script src="directive/showdirective/text/text.view.js"></script>
+		<script src="directive/showdirective/check/check.view.js"></script>
+		<script src="directive/showdirective/checks/checks.view.js"></script>
+		<script src="directive/showdirective/number/number.view.js"></script>
+		<script src="directive/showdirective/select/select.view.js"></script>
+		<script src="directive/showdirective/table/table.view.js"></script>
+		<script src="directive/showdirective/customTable/customTable.view.js"></script>
+		<script src="directive/showdirective/updataFile/updataFile.view.js"></script>
+		<script src="directive/showdirective/appointInput/appoint.view.js"></script>
+		<script src="directive/showdirective/postInput/postInput.view.js"></script>
+		<!--新增时间控件-->
+		<script src="library/layer/laydate/laydate.js"></script>
+		<!-- 申请控件 -->
+		<script src="directive/showdata/input/input.view.js"></script>
+		<script src="directive/showdata/pasword/pasword.view.js"></script>
+		<script src="directive/showdata/text/text.view.js"></script>
+		<script src="directive/showdata/check/check.view.js"></script>
+		<script src="directive/showdata/checks/checks.view.js"></script>
+		<script src="directive/showdata/number/number.view.js"></script>
+		<script src="directive/showdata/select/select.view.js"></script>
+		<script src="directive/showdata/table/table.view.js"></script>
+		<script src="directive/showdata/customTable/customTable.view.js"></script>
+		<script src="directive/showdata/datepicker/datepicker.view.js"></script>
+		<script src="directive/showdata/datetime/datetime.view.js"></script>
+		<script src="directive/showdata/updataFile/updataFile.view.js"></script>
+		<script src="directive/showdata/appointInput/appoint.view.js"></script>
+		<script src="directive/showdata/postInput/postInput.view.js"></script>
+		<!--审批控件-->
+		<script src="directive/approvelFormData/input/input.view.js"></script>
+		<script src="directive/approvelFormData/text/text.view.js"></script>
+		<script src="directive/approvelFormData/check/check.view.js"></script>
+		<script src="directive/approvelFormData/checks/checks.view.js"></script>
+		<script src="directive/approvelFormData/number/number.view.js"></script>
+		<script src="directive/approvelFormData/select/select.view.js"></script>
+		<script src="directive/approvelFormData/table/table.view.js"></script>
+		<script src="directive/approvelFormData/customTable/customTable.view.js"></script>
+		<script src="directive/approvelFormData/datepicker/datepicker.view.js"></script>
+		<!--蓝水母-->
+		<script src="page/ism/ism.view.js"></script>
+		<script src="page/ism/ism.index/ism.index.view.js"></script>
+		<script src="page/ism/ism.developing/ism.developing.view.js"></script>
+		<script src="page/ism/ism.nav/ism.nav.view.js"></script>
+		<script src="page/ism/ism.rule/ism.rule.view.js"></script>
+		<script src="page/ism/ism.shipPosition/ism.shipPosition.view.js"></script>
+		<script src="page/ism/ism.extranetSee/ism.extranetSee.view.js"></script>
+		<!--蓝水母指令加载-->
+		<script src="directive/giveMeMoney/giveMeMoney.view.js"></script>
+		<!--蓝水母插件-->
+		<script src="library/jquery/responsiveslides.min.js"></script>
+		 <!-- 船员招聘模块 -->
+	    <script src='page/invite/invite.module.js'></script>
+	    <script src='page/invite/invite.message/invite.message.view.js'></script>
+	    <script src='page/invite/invite.message/invite.message-job/invite.message-job.view.js'></script>
+	    <script src='page/invite/invite.message/invite.message-list/invite.message-list.view.js'></script>
+	    <script src='page/invite/invite.message/invite.message-notice/invite.message-notice.view.js'></script>
+	    <script src='page/invite/invite.message/invite.messageDetail/invite.messageDetail.view.js'></script>
+	    <script src='page/invite/invite.message/invite.noticeDetail/invite.noticeDetail.view.js'></script>
+	    <script src='page/invite/invite.message/invite.jobDetail/invite.jobDetail.view.js'></script>
+	    <script src='page/invite/invite.companyJob/invite.companyJob.view.js'></script>
+	    <script src='page/invite/invite.alternative/invite.alternative.view.js'></script>
+	    <script src='page/invite/invite.publishJob/invite.publishJob.view.js'></script>
+	    <script src="page/invite/invite.intentioncompany/invite.intentioncompany.view.js"></script>
+	    <script src='page/invite/invite.offerdetail/invite.offerdetail.view.js'></script> 
+	    <script src='page/invite/invite.sendofferdetail/invite.sendofferdetail.view.js'></script>
+	    <script src='directive/writeLeabel/writeLeabel.view.js'></script>
+	    <script src='directive/viewrecommend/viewrecommend.view.js'></script>
+	    <script src="directive/openSelfMsg/openSelfMsg.view.js"></script>
+	    <script src="page/sailorLogin/sailorLogin.view.js"></script>
+
+</html>

@@ -1,0 +1,48 @@
+﻿<div class="sys-login">
+	<div class="login-main" ng-keypress="keyLogin($event)">
+		<div class="login-title text-center">
+			<h1>蓝水母ISM系统</h1>
+			<h2>用户登录</h2>
+			<!-- <h1> -->
+			<!-- <img src="./images/ismtop.png" /> -->
+			<!-- </h1> -->
+		</div>
+		<ul class="loginBtn-tab">
+			<li ng-class="{'on':tabIndex==0}" class="pointer unable-to-select" ng-click="tabWay(0)">普通用户</li>
+			<li ng-class="{'on':tabIndex==1}" class="pointer unable-to-select" ng-click="tabWay(1)">手机用户</li>
+		</ul>		
+		<div class="login-way1" ng-show="tabIndex==0">
+			<div class="login-item">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				<input name="nick" ng-model="nick" class="form-control superior-id" placeholder="用户ID">
+			</div> 
+			<div class="login-item">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				<input name="password" type="password" ng-model="password" class="form-control password" placeholder="密码">
+			</div>
+			<div class="login-item redcolor">{{loginError}}</div>
+		</div>
+		<div class="login-way2" ng-show="tabIndex==1">
+			<div class="login-item">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				<input name="nick" ng-model="phone" class="form-control superior-id" placeholder="手机号码">
+			</div>
+			<div class="login-item">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				<input name="veriCodeBtn" type="text" ng-model="veriCode" class="form-control password verificationCode" placeholder="短信验证码">
+				<button type="button" class="sendCode" ng-class="{'on':veriCodeBtn}" ng-click="getPhoneViefCode()" ng-disabled="veriCodeBtn">{{veriCodePrompt}}</button>
+			</div>
+			<div class="login-item redcolor">{{loginError}}</div>
+		</div>
+		<div class="text-center text-info ui-content">
+			<button type="submit" ng-click="login()" class="login-btn btn logining btn-block" ng-disabled="logining">登 录</button>
+		</div>
+		<div class="footer_icon">
+			<img src="./images/footer_icon.png" />
+		</div>
+		<!--<p>普通用户   手机用户</p>-->
+		<!--div class="text-center text-info ui-content">
+		<h4>还没有账号? <a ui-sref="register" class="text-info">现在注册一个</a></h4>
+		</div-->
+	</div>
+</div>

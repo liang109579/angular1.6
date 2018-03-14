@@ -1,0 +1,190 @@
+<!--审批设置-->
+<div class="fill-person approval-process">
+	<form name="formApproval" class="form-horizontal">
+		<p class="btn-addNode text-right"><button class="btn btn-info" ng-click="addNode()">添加审批节点</button></p>
+		<div class="approval-items">
+			<div class="approvalNode" ng-repeat="item in nodeList">
+				<!--<p ng-click="goTop($index)" class="move-btn move-top" ng-show="$index != 0" title="上移"><span class="icon-caret-up"></span></p>
+				<p ng-click="goDown($index)" class="move-btn move-down" ng-show="$index != (nodeList.length - 1)" title="下移"><span class=" icon-caret-down"></span></p>-->
+				<p class="btn-removeNode">
+					<button type="button" ng-click="remove($index)" class="btn btn-info btn-remove">移除</button>
+				</p>
+				<div class="form-group row">
+					<label class="col-xs-12  col-md-2 control-label">审批等级：</label>
+					<div class="col-xs-12 col-md-8">
+						<input class="form-control" type="number" ng-model="item.level" min="1" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-xs-12  col-md-2 control-label">审批人类别：</label>
+					<div class="col-xs-12 col-md-8">
+						<select class="form-control" ng-model="item.type" ng-options="item.type as item.name for item in selectAndRadio.chooseType" ng-change="deleChoose($index)">
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group row" ng-show="item.type == 'dept' || item.type == 'post' ||item.type == 'user' ||item.type == 'leader' ||item.type == 'emp'">
+					<label class="col-xs-12 col-md-2 control-label">审批人：</label>
+					<!--前5种情况需要显示这个弹窗-->
+					<div class="col-xs-12 col-md-8">
+						<div class="form-control post-selected" ng-click="choosePerson($event,$index)">
+							<ul class="post-selected selected-list overflow">
+								<li ng-init="numIndex = $index" ng-show="false"></li>
+								<li class="inline-block" ng-repeat="x in item.value track by $index">
+									<p class="inline-block selected-postname">
+										<span>{{x}}</span>
+										<a href="" class="delete" ng-click="delsprbd(numIndex,$index);$event.stopPropagation()">x</a>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<p class="post-selectip">注：点击框内空白区选择审批人</p>
+					</div>
+				</div>
+
+				<!--当选择流程中寻找的时候显示， 其他时候不显示-->
+				<div class="form-group row" ng-show="item.type == 'process'">
+					<label class="col-xs-12 col-md-2 control-label">选择使用流程名称：</label>
+					<div class="col-xs-12 col-md-8">
+						<span ng-show="false" ng-init="ix = $index"></span>
+						<select class="form-control" ng-model="item.processName" ng-options="x as x for x in item.selectDataS" ng-change="appChage(ix,item.processName)">
+						</select>
+					</div>
+				</div>
+				<!--后面的情况需要显示这个下拉列表-->
+				<div class="form-group row" ng-show="item.type == 'procDept' || item.type == 'procPost' ||item.type == 'procLeader' ||item.type == 'procEmp' ||item.type == 'procUser' || item.type == 'process' || item.type == 'procDeptLeaderByPost'">
+					<label class="col-xs-12 col-md-2 control-label">请选择字段名称：</label>
+					<div class="col-xs-12 col-md-8">
+						<select class="form-control" ng-model="item.use" ng-options="x as x for x in item.selectData">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row" ng-show="item.type != 'superiorLeader'">
+					<label class="col-xs-12  col-md-2 control-label">数据来源：</label>
+					<div class="col-xs-12 col-md-8">
+						<span ng-show="false" ng-init="j = $index"></span>
+						<select class="form-control" ng-options="x.value as x.name for x in  selectAndRadio.selectionCondition.dataSources" ng-model="item.src" ng-change="isDataSource(j)">
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group row" ng-show="item.type != 'superiorLeader'">
+					<label class="col-xs-12  col-md-2 control-label">寻找方式：</label>
+					<div class="col-xs-12 col-md-8">
+						<div class="radio-choose seekingWay-choose">
+							<p class="inline-block" ng-show="item.src == 'starter'">
+								<input type="radio" id="{{'seekingWay'+$index + 1}}" name="{{'seekingWay'+$index}}" ng-model="item.direction" ng-checked="item.direction == 'up'" value="up" />
+								<label for="{{'seekingWay'+$index + 1}}">最近上级
+								</label>
+							</p>
+							<p class="inline-block" ng-show="item.src == 'starter'">
+								<input type="radio" id="{{'seekingWay'+$index + 2}}" name="{{'seekingWay'+$index}}" ng-model="item.direction" ng-checked="item.direction == 'down'" value="down" />
+								<label for="{{'seekingWay'+$index + 2}}">最近下级
+							</label>
+							</p>
+							<p class="inline-block">
+								<input type="radio" id="{{'seekingWay'+$index + 3}}" name="{{'seekingWay'+$index}}" ng-model="item.direction" ng-checked="item.direction == 'subs'" value="subs" />
+								<label for="{{'seekingWay'+$index + 3}}">所有下级 
+							</label>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-xs-12  col-md-2 control-label">通过条件：</label>
+					<div class="col-xs-12 col-md-8">
+						<div class="radio-choose passingCondition-choose">
+							<p class="inline-block">
+
+								<input ng-click="radioCondition($index,0);$event.stopPropagation();" ng-checked="item.adoptCondition[0].check" type="radio" id="{{'passingCondition'+$index + 1}}" name="{{'passingCondition'+$index}}" />
+								<label for="{{'passingCondition'+$index + 1}}">全员
+						</label>
+							</p>
+							<p class="inline-block">
+
+								<input type="radio" ng-click="radioCondition($index,1)" ng-checked="item.adoptCondition[1].check" id="{{'passingCondition'+$index + 2}}" name="{{'passingConditionss'+$index}}" />
+								<input type="number" ng-change="radioCondition($index,1)" min="0" max="100" class="form-control short-input" ng-model="item.adoptCondition[1].value" /> <label for="{{'passingCondition'+$index + 2}}"> %
+						</label>
+							</p>
+							<p class="inline-block">
+
+								<input type="radio" ng-click="radioCondition($index,2)" ng-checked="item.adoptCondition[2].check" id="{{'passingCondition'+$index + 3}}" name="{{'passingConditionss'+$index}}" />
+								<input type="number" ng-change="radioCondition($index,2)" min="0" max="1000" class="form-control short-input" ng-model="item.adoptCondition[2].value" /> <label for="{{'passingCondition'+$index + 3}}">人
+						</label>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row" ng-show="item.type != 'superiorLeader'">
+					<label class="col-xs-12 col-md-2 control-label">设定审批人筛选条件：</label>
+					<div class="col-xs-12 col-md-8">
+						<div class="radio-choose seekingWay-choose">
+							<p class="inline-block">
+
+								<input type="radio" id="{{'setConditions'+$index + 1}}" name="{{'setConditions'+$index}}" ng-checked="item.approverConditionRadio == 1" ng-click="item.approverConditionRadio =1;isValue($index,1);$event.stopPropagation();" />
+								<label for="{{'setConditions'+$index + 1}}">是
+							</label>
+							</p>
+							<p class="inline-block">
+
+								<input type="radio" id="{{'setConditions'+$index + 2}}" name="{{'setConditions'+$index}}" ng-checked="item.approverConditionRadio == 0" ng-click="item.approverConditionRadio = 0;isValue($index,0);$event.stopPropagation();" />
+								<label for="{{'setConditions'+$index + 2}}">否
+							</label>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!--审批人筛选条件start-->
+				<div class="approverConditions" ng-show="item.approverConditionRadio && item.type != 'superiorLeader'">
+					<div class="form-group row">
+						<label class="col-xs-12  col-md-2 control-label">审批人数据来源：</label>
+						<div class="col-xs-12 col-md-8">
+							<select class="form-control" ng-model="item.valueCondition.src" ng-options="k.value as k.name for k in selectAndRadio.approverCondition.dataSources" ng-change="valueCon($index,item.valueCondition.src)">
+							</select>
+						</div>
+					</div>
+					<div class="form-group row" ng-show="item.valueCondition.src=='process'">
+						<label class="col-xs-12  col-md-2 control-label">使用名称：</label>
+						<div class="col-xs-12 col-md-8">
+							<select class="form-control" ng-model="item.valueCondition.use" ng-options="x as x for x in selectData">
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-xs-12  col-md-2 control-label">判断方式：</label>
+						<div class="col-xs-12 col-md-8">
+							<div class="radio-choose judgment-choose">
+								<p class="inline-block">
+									<input type="radio" id="{{'radio1'+$index +1}}" name="{{'radio1'+$index}}" value="=" ng-model="item.valueCondition.operator" /> <label for="{{'radio1'+$index +1}}">等于</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" id="{{'radio1'+$index +2}}" name="{{'radio1'+$index}}" value="!=" ng-model="item.valueCondition.operator" /> <label for="{{'radio1'+$index +2}}">不等于</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" id="{{'radio1'+$index +3}}" name="{{'radio1'+$index}}" value=">" ng-model="item.valueCondition.operator" /> <label for="{{'radio1'+$index +3}}">大于</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" id="{{'radio1'+$index +4}}" name="{{'radio1'+$index}}" value="<" ng-model="item.valueCondition.operator" /> <label for="{{'radio1'+$index +4}}">小于</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" id="{{'radio1'+$index +5}}" name="{{'radio1'+$index}}" value="in" ng-model="item.valueCondition.operator" /> <label for="{{'radio1'+$index +5}}">包含</label>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-xs-12  col-md-2 control-label">判断值：</label>
+						<div class="col-xs-12 col-md-8">
+							<input type="text" class="form-control" ng-model="item.valueCondition.value" placeholder="{{item.valueCondition.operator == 'in'?'请按照格式填写：大副，船长，...，船名':''}}" />
+						</div>
+					</div>
+				</div>
+				<!--审批人筛选条件end-->
+			</div>
+		</div>
+		<!--<div class="btn-section text-center" ng-show="submitState">
+			<input class="btn btn-info btn-save" value="提交" ng-click="save()" type="button">
+		</div>-->
+	</form>
+</div>

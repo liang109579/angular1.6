@@ -1,0 +1,37 @@
+<div class="modal-content">
+	<div parent-dragable=3 class="modal-header public-headerbg">
+		<button type="button" class="close" data-dismiss="modal">
+            <span ng-click="cancel()">×</span><span class="sr-only">Close</span>
+        </button>
+		<h4 class="modal-title" id="publicTitle">流程列表</h4>
+	</div>
+	<form novalidate name="processesList">
+		<div class="modal-body">
+			<div class="officer-list processes">
+				<div class="search clearfix">
+					<button class="btn btn-info pull-right search-btn" id="searchBtn" ng-click="search()">搜索</button>
+					<div class="search-field  pull-right"><span class="glyphicon glyphicon-search form-control-feedback" id="searchIcons"></span>
+						<input class="form-control ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder="请输入流程名称" ng-model="searchName" ng-keyup="keySearch($event)">
+					</div>
+				</div>
+				<div class="show-selected clearfix">
+					<p class="selected-titile fl">已选流程：</p>
+					<ul class="post-selected selected-list overflow">
+						<li class="inline-block">
+							<p class="inline-block selected-postname">
+								<span>{{Officer.name}}</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="processes-container scroll300">
+					<span class="process-name" ng-repeat="item in searchList" ng-click="okOff($index)">{{item.name}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer btn-section text-right">
+			<button ng-click="save()" class="btn btn-info btn-save">提交</button>
+			<button type="button" class="btn btn-cancel" ng-click="cancel()">取消</button>
+		</div>
+	</form>
+</div>

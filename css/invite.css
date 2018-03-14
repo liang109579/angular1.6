@@ -1,0 +1,312 @@
+/*船员招聘css样式表*/
+.cl{
+	clear: both;
+}
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}  
+.messageNav{
+	width: 100%;
+	padding: 20px;
+	/*height: 40px;*/
+}
+.messageNav a{
+	display: inline-block;
+	width: 80px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	color: #fff;
+	background-color: #337ab7;
+}
+
+.messageNav .btn-primary{
+	float: right;
+}
+
+.inviteTop45{
+    top:45px;
+}
+/*消息详情*/
+.messageContent  p{
+	margin-bottom: 30px;
+}
+.messageContent input{
+	display: inline-block;
+	width: 80%;
+}
+.messageContent textarea{
+    display: inline-block;
+	width: 80%;
+	vertical-align: top;
+	min-height: 200px;
+}
+.jobDetailTab{
+	width: 80%;
+	margin:0 auto;
+
+}
+.jobDetailTab td{
+	width: 80%;
+  background-color: #fff;
+}
+
+.jobDetailTab .bgLeft{
+	width: 20%;
+	background-color: #eee;
+	text-align: center;
+}
+.jobDetailTab .bgLeft span{
+	color: red;
+}
+.opcity0{
+	opacity: 0;
+}
+.jobDetailTab{
+	margin-top: 20px;
+}
+.margin20{
+	margin-bottom: 20px;
+}
+.jobDetailTab .bgcolorW{
+	background-color: #fff;
+}
+.jobDetailTab  .leabel{
+	background-color: #fff;
+	border:1px solid #e2e2e2;
+	padding: 5px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.jobDetailTab .leabelList .active{
+	background-color: #5cb85c;
+	color: #fff;
+	border-color: #5cb85c；
+}
+.jobDetailTab  .addLeabel{
+   display: inline-block;
+}
+.jobDetailTab  .leabelList{
+	width: 100%;
+}
+.jobDetailTab  .addLeabel span{
+    padding: 5px;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.jobDetailTab .leftLeabel{
+	 display: inline-block;
+}
+/*这个地方要做响应式*/
+#writeLeabel{
+	width: 450px;
+	/*height: 150px;*/
+	position: fixed;
+	top:40%;
+	left:30%;
+	background-color: #fff;
+	border-radius: 5px;
+	display: none;
+	z-index: 9999;
+}
+#writeLeabel header{
+	height:30px ;
+	color: #fff;
+	line-height: 30px;
+	text-indent: 10px;
+	background-color: #00acee;
+}
+.modal-backdrop{
+z-index: 33;
+}
+#writeLeabel .content{
+	margin: 30px;
+}
+#writeLeabel .footer {
+	margin:0 30px 30px;
+}
+#writeLeabel .footer .marginL{
+	display: inline-block;
+	 margin-left: 265px;
+	 margin-right: 10px;
+
+}
+
+.btnGroup{
+	float: right;
+	margin-top: 15px;
+}
+.btnGroup .btn-info{
+	margin-right: 10px;
+}
+.demo{
+	 width:480px;
+	 margin:40px auto 0 auto;
+   }
+.demo div{
+	height:40px;
+	float:left;
+	width:240px;
+}
+
+/*短信验证码*/
+.notecodeRel{
+	position: relative;
+}
+.notecode{
+	position: absolute;
+	right: 23px;
+	top:15px;
+	color: #999;
+	cursor: pointer;
+	background-color: #fff;
+	border: none;
+}
+.openSelf p{
+ margin-bottom: 20px;
+}
+.openSelf select{
+	margin-bottom: 20px;
+}
+
+.jobList .search-select{
+	display: inline-block;
+	vertical-align: middle;
+    margin-top: 5px;
+}
+
+.jobList  .search-btn{
+	position: relative;
+	top:3px;
+}
+.offerDetail {
+	border: none;
+	width: 80%;
+	margin: 0 auto;
+}
+.offerDetail td{
+	border: none;
+	background-color: #fff;
+	border-top: none !important;
+}
+.offerDetail .bgLeft{
+    width: 20%;
+}
+.fontBlue{
+	color: #5bc0de;
+}
+.joinPerson{
+	margin-right: 20px;
+	margin-top: 10px;
+}
+.vmiddle{
+	vertical-align: middle;
+}
+
+.sendOfferBtn{
+	margin:20px;
+	cursor: pointer;
+	z-index: 9999;
+}
+
+/*公司职位列表*/
+
+.companyJobSearch {
+	color: #fff;
+}
+.companyJobSearch input{
+	background-color: #142637;
+	border-color: #00a0e9;
+	color: #fff;
+}
+.companyJobSearch input::-webkit-input-placeholder {
+   color: #fff;
+}
+.companyJobSearch .search-select select{
+    border-color: #00a0e9;
+	background-color: #142637 !important;
+	color: #fff;
+}
+
+.companyJobSearch #homecity_name{
+	color: #fff !important;
+
+}
+
+.companyJobSearch #searchBtn{
+	background-color: #00a0e9;
+	color: #fff;
+	width: 80px;
+	margin-top: -10px;
+}
+
+.companyJobSearch .locationJob{
+	background-color: #00a0e9;
+	float: right;
+}
+.companyJobSearch .search-select {
+	margin-bottom: 10px;
+	margin-right: 20px;
+}
+
+.jobListWrap .jobList{
+	cursor: pointer;
+	margin-left: 10px;
+	border:1px solid #00a0e9 ;
+	border-radius: 5px;
+	padding: 10px;
+	color: #fff;
+	margin-bottom: 20px;
+	background-color: rgba(0,0,0,.1);
+	display: flex;
+	justify-content:center;
+	align-items: center;
+}
+
+.jobListWrap .jobTitle{
+       font-size: 16px;
+       color: #00ffde;
+}
+
+.jobList .sendBtn{
+    width: 64px;
+    height: 32px;
+    background-color: #00a0e9;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 18px;
+    vertical-align: middle;
+
+}
+.sendBtnWrap{
+	display: inline-block;
+	vertical-align: middle;
+	align-items:center;
+}
+@media(max-width:768px){
+	.jobListWrap{
+		width: 100%;
+		padding-right: 20px;
+	}
+	.jobList .sendBtn{
+		width: 50px;
+		height: 30px;
+		line-height: 16px;
+		border-radius: 5px;
+	}
+}
+@media(min-width:768px){
+	.jobListWrap{
+		width: 80%;
+	}
+}

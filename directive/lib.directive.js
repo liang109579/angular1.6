@@ -1,0 +1,30 @@
+/**
+ * 用作所有指令加载
+ */
+angular.module('directiveModel', [
+    'citySelecteds',
+    'aoHaiSelected',
+    'aoHaiRadioModule',
+    'lsmPagesModule',
+    'lsmCheckModule',
+    'lsmUpdateUserModule',
+    'lsmUpdateDepartmentModule',
+    'lsmSelectDepartModule',
+    'lsmCheckSelectDepartModule',
+    'processListModule',
+    'viewNoticeModule',
+    'viewMsgModule',
+    'openTableDesignModel',
+    'checkTableDataModel',
+    'openDiyTableModel',
+    'crewListModel',
+    'userAuthModule',
+    'giveMeMoneyModule',
+    'lsmDepartmentSelectionModule',
+    'lsmPostSelectionModule',
+    'lsmAddAgentPostModule',
+    'aftProcessListModule',
+    'writeLeabelModule',
+    'viewrecommendModule',
+    'openSelfMsgModule'
+]);

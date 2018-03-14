@@ -1,0 +1,618 @@
+<!-- ng-mouseleave="mouseLeave($event)" ng-mouseover="mouseOver($event)" -->
+<div class="row clearfix data-process">
+	<div class="col-xs-12 col-md-5 col-lg-4 cell-border pull-right data-control">
+		<ul id="myTab" class="nav nav-tabs">
+			<li>
+				<a ng-click="tabShow(0)" data-toggle="tab" ng-class="{'on':tabIndex==0}">添加控件</a>
+			</li>
+			<li>
+				<a ng-click="tabShow(1)" data-toggle="tab" ng-class="{'on':tabIndex==1}">编辑控件</a>
+			</li>
+			<li>
+				<a ng-click="tabShow(2)" data-toggle="tab" ng-class="{'on':tabIndex==2}">数据包设定</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="myTabContent" ng-show="tabIndex==0" class="tab-button tab-pane fade in active">
+				<div class="row">
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(1)" class="btn btn-info width100">单行文本</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(2)" class="btn btn-info width100">多行文本</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(3)" class="btn btn-info width100">单选框</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(4)" class="btn btn-info width100">复选框</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(5)" class="btn btn-info width100">下拉菜单</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(7)" class="btn btn-info width100">数字</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(6)" class="btn btn-info width100">日期</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(10)" class="btn btn-info width100">带时间日期</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(8)" class="btn btn-info width100">表格</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(9)" class="btn btn-info width100">自定义表格</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(12)" class="btn btn-info width100 text-center">选择人员</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(13)" class="btn btn-info width100 text-center">选择职务</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(14)" class="btn btn-info width100">密码框</button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" ng-click="addControl(11)" class="btn btn-info width100">文件上传</button>
+					</div>
+
+				</div>
+			</div>
+			<div ng-show="tabIndex==1" class="tab-section tab-pane fade in active">
+				<!--文件上传组件-->
+				<ul ng-show="current.type == 'show-file'">
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>是否替换体系正文：</label>
+						<div class="radio-choose replace-account">
+							<p class="inline-block"><input type="radio" id="replaceY" ng-checked="current.isSystemCfg == 1" ng-click="current.isSystemCfg = 1" value="1" /> <label for="replaceY">是</label></p>
+							<p class="inline-block"><input type="radio" id="replaceN" ng-checked="current.isSystemCfg == 0" ng-click="current.isSystemCfg = 0" value="0" /> <label for="replaceN">否</label></p>
+						</div>
+					</li>
+				</ul>
+				<!--文本组件-->
+				<ul ng-show="current.type == 'show-input' || current.type == 'show-text' ">
+					<li ng-show="current.src == 'pkg'">
+						<input id="isDisplay1" type="checkbox" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay1" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" class="form-control" placeHolder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount1" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount1" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>提示文字：</label>
+						<input type="text" ng-model="current.placeHolder" class="form-control" placeHolder="提示文字" />
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired1" ng-model="current.required" />
+						<label for="isRequired1" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>最小长度：</label>
+						<input type="number" class="form-control" ng-model="current.minLength" min="2" />
+					</li>
+					<li>
+						<label>最大长度：</label>
+						<input type="number" class="form-control" ng-model="current.maxLength" max="64" />
+					</li>
+					<li>
+						<label>错误提示：</label>
+						<input type="text" class="form-control" ng-model="current.errorText" placeHolder="错误提示文字" />
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--密码框组件-->
+				<ul ng-show="current.type == 'show-pasword'">
+					<li ng-show="current.src == 'pkg'">
+						<input id="isDisplay1" type="checkbox" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay1" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" class="form-control" placeHolder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount1" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount1" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>提示文字：</label>
+						<input type="text" ng-model="current.placeHolder" class="form-control" placeHolder="提示文字" />
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired1" ng-model="current.required" />
+						<label for="isRequired1" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>最小长度：</label>
+						<input type="number" class="form-control" ng-model="current.minLength" min="6" />
+					</li>
+					<li>
+						<label>最大长度：</label>
+						<input type="number" class="form-control" ng-model="current.maxLength" max="16" />
+					</li>
+					<li>
+						<label>错误提示：</label>
+						<input type="text" class="form-control" ng-model="current.errorText" placeHolder="错误提示文字" />
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--单选、多选组件-->
+				<ul ng-show="current.type == 'show-check' || current.type == 'show-checks'">
+					<li ng-show="current.src == 'pkg'">
+						<input type="checkbox" id="isDisplay2" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay2" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" placeholder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount2" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount2" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>选项设置（请用逗号隔开）：</label>
+						<textarea ng-model="current.option" ng-change="changeOption()" class="form-control" placeHolder="选项设置"></textarea>
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired2" ng-model="current.required" />
+						<label for="isRequired2" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--下拉菜单组件-->
+				<ul ng-show="current.type == 'show-select'">
+					<li ng-show="current.src == 'pkg'">
+						<input type="checkbox" id="isDisplay3" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay3" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" placeholder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount3" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount3" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>选项设置：</label>
+						<div class="radio-choose select-choose">
+							<p class="inline-block" ng-click="selsectIsUrl(true)">
+								<input type="radio" name="'rads'+$index" ng-checked="current.isUrl == true" ng-model="current.isUrl" id="companyData" />
+								<label for="companyData">使用公司数据</label>
+							</p>
+							<p class="inline-block" ng-click="selsectIsUrl(false)">
+								<input type="radio" name="'rads'+$index" ng-checked="current.isUrl == false" ng-model="current.isUrl" id="customData" />
+								<label for="customData">自定义列表（请用逗号隔开）</label>
+							</p>
+						</div>
+						<select class="form-control" ng-if="current.isUrl" ng-model="current.url" ng-options="x.value as x.key for x in companyDataList">
+
+						</select>
+						<textarea ng-if="!current.isUrl" ng-model="current.option" ng-change="changeOption()" class="form-control" placeHolder="选项设置"></textarea>
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired3" ng-model="current.required" />
+						<label for="isRequired3" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--日期组件-->
+				<ul ng-show="current.type == 'date-picker' || current.type == 'date-time'">
+					<li ng-show="current.src == 'pkg'">
+						<input type="checkbox" id="isDisplay4" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay4" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" placeholder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount4" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount4" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="日期" />
+					</li>
+					<li ng-show="current.type == 'date-picker'">
+						<label>日期格式设置：</label>
+						<p>年-月-日</p>
+					</li>
+					<li ng-show="current.type == 'date-time'">
+						<label>日期格式设置：</label>
+						<p>年-月-日 时-分-秒</p>
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired4" ng-model="current.required" />
+						<label for="isRequired4" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--数字组件-->
+				<ul ng-show="current.type == 'show-number'">
+					<li ng-show="current.src == 'pkg'">
+						<input type="checkbox" id="isDisplay5" ng-model="current.isDisplay" ng-change="ordinary(current)" />
+						<label for="isDisplay5" class="afterLabel">是否显示：</label>
+					</li>
+					<li ng-show="current.src == 'pkg' && !current.isDisplay">
+						<label><span class="required">*</span> 默认值：</label>
+						<input class="form-control" type="text" ng-model="current.value" placeholder="请输入默认值" />
+					</li>
+					<li>
+						<input type="checkbox" id="displayAccount5" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount5" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<label>提示文字：</label>
+						<input type="text" ng-model="current.placeHolder" class="form-control" placeHolder="提示文字" />
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired5" ng-model="current.required" />
+						<label for="isRequired5" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--指定人员组件-->
+				<ul ng-show="current.type == 'show-appoint'">
+					<li>
+						<input type="checkbox" id="displayAccount6" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount6" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired6" ng-model="current.required" />
+						<label for="isRequired6" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--选择职务组件-->
+				<ul ng-show="current.type == 'show-post'">
+					<li>
+						<input type="checkbox" id="displayAccount6" ng-model="current.ledgerDisplay" />
+						<label for="displayAccount6" class="afterLabel">台帐中显示：</label>
+					</li>
+					<li>
+						<label>标题：</label>
+						<input type="text" ng-model="current.text" class="form-control" placeHolder="文本" />
+					</li>
+					<li>
+						<input type="checkbox" id="isRequired6" ng-model="current.required" />
+						<label for="isRequired6" class="afterLabel">是否必填：</label>
+					</li>
+					<li>
+						<label>数据填入等级：</label>
+						<input type="number" class="form-control" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+					</li>
+				</ul>
+				<!--表格组件-->
+				<div ng-show="current.type == 'show-table'" class="data-table-edit clearfix">
+					<ul>
+						<li>
+							<label>行数：</label>
+							<input type="number" min="1" ng-model="current.rows" class="form-control" ng-blur="tableContentBlur('row')" ng-change="ranksChangeRow()" />
+						</li>
+						<li>
+							<label>列数：</label>
+							<input type="number" min="1" ng-model="current.cols" class="form-control" ng-blur="tableContentBlur('col')" ng-change="ranksChangeCol()" />
+						</li>
+						<li>
+							<label>数据填入等级：</label>
+							<input type="number" class="form-control" ng-change="tableChange(current.level, current.content)" ng-model="current.level" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+						</li>
+						<li>
+							<label>是否绑定数据包：</label>
+							<div class="radio-choose">
+								<p class="inline-block">
+									<input type="radio" name="dataPack" ng-model="current.isData" ng-checked="current.isData == true" ng-click="current.isData = true;switchs(current)" id="Ypacket" />
+									<label for="Ypacket">是</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" name="dataPack" ng-model="current.isData" ng-checked="current.isData == false" ng-click="current.isData = false;switchs(current)" id="Npacket" />
+									<label for="Npacket">否</label>
+								</p>
+							</div>
+						</li>
+						<li ng-show="current.isData">
+							<label>已绑定数据包详情：</label>
+							<div class="table-responsive packet-detail">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>{{current.colOrRow == 'row'?'行':current.colOrRow == 'col'?'列':''}}名</th>
+											<th>包名</th>
+											<th>字段</th>
+											<th>显示</th>
+											<th>默认值</th>
+											<th width="75">
+												<a class="packet-add" ng-click="removeDatas(current)">全部删除</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- ngRepeat: n in dataPacket -->
+										<tr ng-repeat="(key,value) in current.dataField ">
+											<td>第{{key - 0 + 1}} {{current.colOrRow == 'row'?'行':current.colOrRow == 'col'?'列':''}}</td>
+											<td>{{value.pkg_text}}</td>
+											<td>{{value.colText}}</td>
+											<td>{{value.isDisplay?'是':'否'}}</td>
+											<td>{{value.value == ''?'无':value.value}}</td>
+											<td width="75">
+												<a class="packet-add" ng-click="removeData(key,current)">删除</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</li>
+						<li ng-show="current.isData">
+							<label>请选择按照行或列绑定：</label>
+							<div class="radio-choose">
+								<p class="inline-block">
+									<input type="radio" name="iasm" ng-model="current.colOrRow" value="row" ng-checked="current.colOrRow == 'row'" ng-click="colOrRow(current)" id="rowPacket" />
+									<label for="rowPacket">行</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" name="iasm" ng-model="current.colOrRow" value="col" ng-checked="current.colOrRow == 'col'" ng-click="colOrRow(current)" id="colPacket" />
+									<label for="colPacket">列</label>
+								</p>
+							</div>
+						</li>
+						<li ng-show="current.isData">
+							<div class="clearfix packet-select">
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.position" ng-options="d.value as d.key for d in positions">
+										<option value="">请选择{{current.colOrRow == 'row'?'行':current.colOrRow == 'col'?'列':''}}</option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.pkg_id" ng-options="item.id as item.packageName for item in sourceList" ng-change="tableData(tableVariable.pkg_id)">
+										<option value="">请选择数据包</option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.colName" ng-options="w.colName as w.text for w in dataWord">
+										<option value="">请选择字段</option>
+									</select>
+								</div>
+							</div>
+							<div class="packet-show">
+								<input type="checkbox" ng-model="tableVariable.isDisplay" id="isDisplayTable1" ng-change="ordinary()" />
+								<label for="isDisplayTable1" class="afterLabel">是否显示：</label>
+
+							</div>
+							<div class="default-value" ng-show="tableVariable.isDisplay == false">
+								<label class="block fl"><span class="required">*</span> 默认值：</label>
+								<div class="overflow"><input type="text" class="form-control" ng-model="tableVariable.value" /></div>
+							</div>
+						</li>
+						<li ng-show="current.isData" class="clearfix">
+							<button type="button" ng-click="addDataFile(current)" class="btn btn-info pull-right">确认绑定</button>
+						</li>
+					</ul>
+					<!--增加按钮可以弹出弹窗  弹窗为表格-->
+					<button type="button" ng-click="openTableDesign($event,current)" class="btn btn-info pull-right edit-table">编辑表格内容</button>
+				</div>
+				<!--自定义表格组件-->
+				<div ng-show="current.type == 'diy-table'" class="data-table-edit clearfix">
+					<ul>
+						<li>
+							<label>列数：</label>
+							<input type="number" min="1" ng-model="current.cols" class="form-control" ng-blur="tableContentBlur('col')" ng-change="ranksChangeCol()" />
+						</li>
+						<li>
+							<label>数据填入等级：</label>
+							<input type="number" class="form-control" ng-model="current.level" ng-change="tableChange(current.level, current.content)" placeHolder="第几审批等级时开始填入数据，0代表申请人" />
+						</li>
+						<li>
+							<label>是否绑定数据包：</label>
+							<div class="radio-choose">
+								<p class="inline-block">
+									<input type="radio" name="current" ng-model="current.isData" ng-checked="current.isData == true" ng-click="current.isData = true;switchs(current)" id="Ypacket2" />
+									<label for="Ypacket2">是</label>
+								</p>
+								<p class="inline-block">
+									<input type="radio" name="current" ng-model="current.isData" ng-checked="current.isData == false" ng-click="current.isData = false;switchs(current)" id="Npacket2" />
+									<label for="Npacket2">否</label>
+								</p>
+							</div>
+						</li>
+						<li ng-show="current.isData">
+							<label>已绑定数据包详情：</label>
+							<div class="table-responsive packet-detail">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>列名</th>
+											<th>包名</th>
+											<th>字段</th>
+											<th>显示</th>
+											<th>默认值</th>
+											<th width="75">
+												<a class="packet-add" ng-click="removeDatas(current)">全部删除</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- ngRepeat: n in dataPacket -->
+										<tr ng-repeat="(key,value) in current.dataField ">
+											<td>第{{key - 0 + 1}}列</td>
+											<td>{{value.pkg_text}}</td>
+											<td>{{value.colText}}</td>
+											<td>{{value.isDisplay?'是':'否'}}</td>
+											<td>{{value.value == ''?'无':value.value}}</td>
+											<td width="75">
+												<a class="packet-add" ng-click="removeData(key,current)">删除</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</li>
+						<li ng-show="current.isData">
+							<div class="clearfix packet-select">
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.position" ng-options="d.value as d.key for d in positions">
+										<option value="">请选择列</option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.pkg_id" ng-options="item.id as item.packageName for item in sourceList" ng-change="tableData(tableVariable.pkg_id)">
+										<option value="">请选择数据包</option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<select class="form-control" ng-model="tableVariable.colName" ng-options="w.colName as w.text for w in dataWord">
+										<option value="">请选择字段</option>
+									</select>
+								</div>
+							</div>
+							<div class="packet-show">
+								<input type="checkbox" ng-model="tableVariable.isDisplay" id="isDisplayTable1" ng-change="ordinary()" />
+								<label for="isDisplayTable1" class="afterLabel">是否显示：</label>
+							</div>
+							<div class="default-value" ng-show="tableVariable.isDisplay == false">
+								<label class="block fl"><span class="required">*</span> 默认值：</label>
+								<div class="overflow"><input type="text" class="form-control" ng-model="tableVariable.value" /></div>
+							</div>
+						</li>
+						<li ng-show="current.isData" class="clearfix">
+							<button type="button" ng-click="addDataFile(current)" class="btn btn-info pull-right">确认绑定</button>
+						</li>
+					</ul>
+					<!--增加按钮可以弹出弹窗  弹窗为表格-->
+					<button type="button" ng-click="openDiyTable($event,current)" class="btn btn-info pull-right edit-table">编辑表格内容</button>
+				</div>
+			</div>
+
+			<div ng-show="tabIndex==2" class="tab-section tab-pane fade in active">
+				<div class="data-source">
+					<p>数据包来源：</p>
+					<div class="clearfix source-select">
+						<select ng-model="dataPkgId" class="form-control pull-left" ng-options="item.id as item.packageName for item in sourceList">
+							<option value="">请选择数据包来源</option>
+						</select>
+						<button type="button" ng-click="showSetting()" class="btn btn-info pull-right">确定</button>
+					</div>
+				</div>
+				<!--数据包设定-->
+				<div class="table-responsive table-dataPacket" ng-show="settingState">
+					<table class="table">
+						<thead>
+							<tr>
+								<th width="75">
+									<a class="packet-add" ng-click="chkAll()">全部添加</a>
+								</th>
+								<th>字段</th>
+								<th>默认名称</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="n in dataPacket">
+								<td>
+									<a class="packet-add" ng-click="onAddData(n)">+ 添加</a>
+								</td>
+								<td><label class="field-name" for="{{n.colName}}">{{n.colName}}</label></td>
+								<td>{{n.text}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-7 col-lg-8 cell-border data-form">
+		<div class="panel panel-default">
+			<div class="panel-heading clearfix">
+				<h4 class="panel-text pull-left">添加右侧控件生成表单</h4>
+				<!--<input type="button" ng-click="save()" class="btn btn-default pull-right" value="保存" />-->
+			</div>
+			<div class="panel-body" ng-click="removeH()">
+				<form class="form-horizontal form-data">
+					<div class="form-group form-item" ng-click="click($index,$event)" ng-repeat="x in formControls track by $index" ng-class="{fade:(x.src == 'pkg' && !x.isDisplay) }">
+						<label class="col-xs-12 col-sm-2 control-label" title="{{x.text}}">
+								<span ng-show="x.required" class="required">*</span>
+								{{x.text}}
+						</label>
+						<div class="col-xs-10 col-sm-8">
+							<div ng-if="x.type == 'show-input'" show-input inpoutdata="x"></div>
+							<div ng-if="x.type == 'show-pasword'" show-pasword pasworddata="x"></div>
+							<div ng-if="x.type == 'show-text'" show-text textdata="x"></div>
+							<div ng-if="x.type == 'show-check'" show-check checkdatas="x"></div>
+							<div ng-if="x.type == 'show-checks'" show-checks checksdata="x"></div>
+							<div ng-if="x.type == 'show-select'" show-select selectdatas="x"></div>
+							<div ng-if="x.type == 'show-number'" show-number numberdata="x"></div>
+							<div ng-if="x.type == 'date-picker'" date-picker pickerdata="''"></div>
+							<div ng-if="x.type == 'date-time'" date-time timedata="''"></div>
+							<div ng-if="x.type == 'show-table'" show-table tabledata="x"></div>
+							<div ng-if="x.type == 'diy-table'" diy-table diytabledata="x"></div>
+							<div ng-if="x.type == 'show-file'" show-file fileData="x"></div>
+							<div ng-if="x.type == 'show-appoint'" show-appoint appointData="x"></div>
+							<div ng-if="x.type == 'show-post'" show-post postdata="x" datacont='[]'></div>
+						</div>
+						<div class="col-xs-2 col-sm-2">
+							<button type="button" ng-click="remove($index,$event)" class="btn btn-info btn-remove">移除</button>
+						</div>
+						<p ng-click="goTop($index,$event)" class="move-btn move-top" ng-show="$index != 0" title="上移"><span class="icon-caret-up"></span></p>
+						<p ng-click="goDown($index,$event)" class="move-btn move-down" ng-show="$index != (formControls.length - 1)" title="下移"><span class="icon-caret-down"></span></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

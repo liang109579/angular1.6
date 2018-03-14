@@ -1,0 +1,40 @@
+<div class="fill-person">
+	<form name="fillPerson" class="form-horizontal">
+		<div class="form-group row">
+			<label class="col-xs-12  col-md-2 control-label">填报人来源：</label>
+			<div class="col-xs-12 col-md-8">
+				<select class="form-control" ng-options="item.type as item.name for item in chooseType" ng-model="userData[2].data.type" ng-change="deleValue()">
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" ng-show="userData[2].data.type == 'dept' || userData[2].data.type == 'post'">
+			<label class="col-xs-12 col-md-2 control-label">填报人：</label>
+			<div class="col-xs-12 col-md-8">
+				<div class="form-control post-selected" ng-click="choosePerson(userData[2].data.value);$event.stopPropagation()">
+					<ul class="post-selected selected-list overflow">
+						<li class="inline-block" ng-repeat="item in userData[2].data.value track by $index">
+							<p class="inline-block selected-postname">
+								<span>{{item}}</span>
+								<a href="" class="delete" ng-click="delsprbd($index);$event.stopPropagation()">x</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<p class="post-selectip">注：点击框内空白区选择填报人</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-xs-12  col-md-2 control-label">填报人数量：</label>
+			<div class="col-xs-12 col-md-8">
+				<div class="radio-choose judgment-choose inline-block" ng-show="userData[2].data.fillIn.unit != 'all'">
+					<input type="number" class="form-control short-input" ng-model="userData[2].data.fillIn.num"/>
+				</div>
+				<div class="radio-choose judgment-choose inline-block">
+					<select class="form-control" ng-options="x.value as x.key for x in applyNum" ng-model="userData[2].data.fillIn.unit">
+					
+					</select>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

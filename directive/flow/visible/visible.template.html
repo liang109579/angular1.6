@@ -1,0 +1,27 @@
+<div class="fill-person">
+	<form name="fillPerson" class="form-horizontal">
+		<div class="form-group row">
+			<label class="col-xs-12  col-md-2 control-label">可见人来源：</label>
+			<div class="col-xs-12 col-md-8">
+				<select class="form-control" ng-options="item.type as item.name for item in chooseType" ng-model="userData[6].data.type" ng-change="deleValue()">
+				</select>
+			</div>
+		</div>
+		<div class="form-group row" ng-show="userData[6].data.type == 'dept' || userData[6].data.type == 'post'">
+			<label class="col-xs-12 col-md-2 control-label">可见人：</label>
+			<div class="col-xs-12 col-md-8">
+				<div class="form-control post-selected" ng-click="choosePerson(userData[6].data.value);$event.stopPropagation()">
+					<ul class="post-selected selected-list overflow">
+						<li class="inline-block" ng-repeat="item in userData[6].data.value track by $index">
+							<p class="inline-block selected-postname">
+								<span>{{item}}</span>
+								<a href="" class="delete" ng-click="delsprbd($index);$event.stopPropagation()">x</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<p class="post-selectip">注：点击框内空白区选择填报人</p>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>校验用法</title>
+</head>
+<body>
+	<div>
+		<input type="text" validator="required">
+		<span>这是必填项！</span>
+	</div>
+	<div>
+		<input type="text" validator="url">
+		<span>url格式不正确！</span>
+	</div>
+	<div>
+		<input type="text" validator="email">
+		<span>Email格式不正确！</span>
+	</div>
+	<div>
+		<input type="text" validator="number">
+		<span>只能填写正整数！</span>
+	</div>
+	<div>
+		<input type="text" validator="minlength = 2" minlength-error-message="长度不能低于10个字符！">
+		<!-- <span>长度不能低于10个字符！</span> -->
+	</div>
+	<div>
+		<input type="text" validator="maxlength = 10" maxlength-error-message="长度不能超过10个字符！">
+		<!-- <span>长度不能超过10个字符！</span> -->
+	</div>
+	<div>
+		<input type="text" validator="spechar">
+		<span>不能包含特殊字符！</span>
+	</div>
+	<div>
+		<input type="text" validator="idcard">
+		<span>身份证号码错误！</span>
+	</div>
+	<div>
+		<input type="text" validator="telephone">
+		<span>固定电话格式错误！</span>
+	</div>
+	<div>
+		<input type="text" validator="mobilephone">
+		<span>手机号码格式错误！</span>
+	</div>
+	<div>
+		<input type="text" validator="haschinese">
+		<span>不能包含汉字</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿<div class="company-apply">
+	<p class="sys-title text-center">航运公司管理系统</p>
+	<div class="apply-container">
+		<div class="apply-information radius5">
+			<p class="apply-title text-center" ng-class="{checkTitle1:data.statusClass1,checkTitle2:data.statusClass2}" ng-bind="data.statusTitle">完善公司信息</p>
+			<form novalidate name="shippingSyS" enctype="multipart/form-data">
+				<fieldset ng-disabled="data.editForm">
+					<ul class="apply-list">
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 企业名称</label>
+							<div class="fill-item">
+								<input class="form-control" type="text" ng-model="status.companyName" name="companyName" validator="required,maxlength=100" maxlength-error-message="长度不能超过100个字！" ng-blur="checkCompanyName()" ng-change="hideTip()" />
+								<p class="rewrite-tip validation-invalid" ng-show="showTip">该企业名称已存在，请重新输入</p>
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 法人代表</label>
+							<div class="fill-item">
+								<input class="form-control" required type="text" ng-model="status.legalPerson" validator="required,maxlength=100" name="legalPerson" maxlength-error-message="长度不能超过100个字！" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for="">企业logo</label>
+							<div class="fill-item clearfix">
+								<img class="preview-img" id="previewLogo" src="images/picture.jpg" ng-src="{{status.logo}}" />
+								<div class="upLoad-img">
+									<div class="btn-addImg">
+										<p class="btn-upLoad"><span class="icon-upload-alt"></span>上传图片</p>
+										<input class="filePrew" id="fileImg1" type="file" ng-model="status.logo" name="compLogo" multiple="" accept="image/png,image/jpg,image/gif,image/JPEG" />
+									</div>
+									<p class="img-tip">请上传不小于100*100像素的图片，支持jpg、gif、png格式，大小不能超过200KB</p>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 营业执照</label>
+							<div class="fill-item clearfix">
+								<img class="preview-img" id="previewLicense" src="images/picture.jpg" ng-src="{{status.businessLicense}}" />
+								<div class="upLoad-img">
+									<div class="btn-addImg">
+										<p class="btn-upLoad"><span class="icon-upload-alt"></span>上传图片</p>
+										<input class="filePrew" type="file" id="fileImg2" ng-model="status.businessLicense" name="compLicense" multiple="" accept="image/png,image/jpg,image/gif,image/JPEG" />
+										<input type="hidden" ng-model="status.businessLicense" name="license" validator="required" />
+									</div>
+									<p class="img-tip">请上传企业营业执照照片，尺寸不小于100*100像素，支持jpg、gif、png格式，大小不能超过200KB</p>
+
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 手持营业执照</label>
+							<div class="fill-item clearfix">
+								<img class="preview-img" id="previewLicenseHold" src="images/picture.jpg" ng-src="{{status.businessLicenseHold}}" />
+								<div class="upLoad-img">
+									<div class="btn-addImg">
+										<p class="btn-upLoad"><span class="icon-upload-alt"></span>上传图片</p>
+										<input class="filePrew" type="file" id="fileImg3" ng-model="status.businessLicenseHold" name="compLicense2" multiple="" accept="image/png,image/jpg,image/gif,image/JPEG" />
+										<input type="hidden" ng-model="status.businessLicenseHold" name="license2" validator="required" />
+									</div>
+									<p class="img-tip">请上传企业法人手持营业执照照片，尺寸不小于100*100像素，支持jpg、gif、png格式，大小不能超过200KB</p>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 组织机构代码</label>
+							<div class="fill-item">
+								<input class="form-control" type="text" ng-model="status.organizationCode" name="orgCode" validator="required,maxlength=9" maxlength-error-message="长度不能超过9个字！" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 成立时间</label>
+							<div class="fill-item">
+								<div class="calendar" date-picker pickerdata="status.setupDate" show-date="false">
+								</div>
+								<input type="hidden" validator="required,date" name="fundDate" ng-model="status.setupDate">
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 企业电话</label>
+							<div class="fill-item">
+								<input class="form-control" validator="required,telephone,maxlength=20" type="text" ng-model="status.contactsTel" name="tel" placeholder="请输入企业电话，如: 0571-28888131" maxlength-error-message="长度不能超过20个字！" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 企业邮箱</label>
+							<div class="fill-item">
+								<input class="form-control" type="email" ng-model="status.contactsEmail" name="mail" placeholder="请输入企业邮箱或个人邮箱" validator="required,email" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for="">企业网址</label>
+							<div class="fill-item">
+								<input class="form-control" name="url" type="text" validator="url" ng-model="status.companyWebsite" placeholder="www.allhigh.com.cn" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for="">经营范围</label>
+							<div class="fill-item">
+								<input class="form-control" type="text" ng-model="status.businessScope" validator="maxlength=300" name="businessScope" maxlength-error-message="长度不能超过300个字！" />
+							</div>
+						</li>
+						<li class="clearfix">
+							<label for=""><span class="required">*</span> 企业地址</label>
+							<div class="fill-item" city-selected ng-model="status.addr"></div>
+						</li>
+						<li class="clearfix">
+							<label for="">企业简介</label>
+							<div class="fill-item">
+								<textarea class="form-control" ng-model="status.companyInfo" name="companyInfo" rows="5" validator="maxlength=500" maxlength-error-message="长度不能超过500个字！"></textarea>
+							</div>
+						</li>
+					</ul>
+					<p class="text-center btn-section">
+						<button ng-click="save()" class="btn btn-info btn-save" validation-submit="shippingSyS" ng-disabled="!shippingSyS.$dirty">提交信息</button>
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>

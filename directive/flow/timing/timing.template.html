@@ -1,0 +1,40 @@
+<div class="time-setting">
+	<div class="form-group timeSetting-item">
+		<label class="control-label">是否启用定时器：</label>
+		<div class="radio-choose timeSetting-choose">
+			<p class="inline-block">
+				<input type="radio" id="timeYes" name="seetConditioni" ng-checked="schedule.type" ng-click="isTime(1); $event.stopPropagation();" />
+				<label for="timeYes">是
+					</label>
+			</p>
+			<p class="inline-block">
+				<input type="radio" id="timeNo" name="seetConditioni" ng-checked="!schedule.type" ng-click="isTime(0); $event.stopPropagation();" />
+				<label for="timeNo">否
+					</label>
+			</p>
+		</div>
+	</div>
+	<form action="" name="timing" ng-show="schedule.type">
+		<div class="time-setting-reason clearfix">
+			<div class="reason-item clearfix">
+				<p class="reason-title fl">起始时间: </p>
+				<div class="reason-main fl">
+					<div date-picker pickerdata="schedule.startTime"></div>
+				</div>
+			</div>
+			<div class="reason-item clearfix">
+				<p class="reason-title fl">设置间隔: </p>
+				<div class="reason-main fl">
+					<select class="form-control" ng-model="schedule.year" ng-options="y.val as y.key for y in yearList">
+
+					</select>
+				</div>
+				<div class="reason-main fl">
+					<select ng-model="schedule.month" class="form-control" ng-options="m.val as m.key for m in monthList">
+
+					</select>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
